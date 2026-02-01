@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MACRO_DB_URL=sqlite:////app/data/macro_data.db
+      - POLY_DB_URL=sqlite:////app/data/polysim.db
+      - SECRET_KEY=${SECRET_KEY:-change_me_in_production}
+    volumes:
+      - app-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  app-data:
